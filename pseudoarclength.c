@@ -7,12 +7,12 @@
 #include "frequency_equation.h"
 
 double getdadkanddbdk(double k,double gamma2,double a,double b,
-                      bool is_sub_critical, bool is_ff, double* dbdkptr);
+                      bool is_sub_critical, boundary_condition bc, double* dbdkptr);
 
 void linearsolve3x3( const double input_matrix[][3], const double* input_rhs, double * lhs);
 
 double arclengthpredictor( double a, double b, double k, bool subcritical, double arclength,
-                           double gamma2, bool is_ff, double *previous_state, double *dads,
+                           double gamma2, boundary_condition bc, double *previous_state, double *dads,
                            double *dbds );
 
 double maxnorm3x3( const double matrix[][3])
@@ -35,7 +35,7 @@ double arclengthcontinuation( double *a,
                               double arclength,
                               double gamma2,
                               double kmax,
-                              bool is_ff,
+                              boundary_condition bc,
                               double *previous_state )
 {
     if( *b < 0. ) *b = 0.;
@@ -46,7 +46,7 @@ double arclengthcontinuation( double *a,
     double k_previous = *k;
     assert( k_previous < kmax );
     double dkds = arclengthpredictor( *a, *b, *k, subcritical, arclength,
-                           gamma2, is_ff, previous_state, &dads, &dbds );
+                           gamma2, bc, previous_state, &dads, &dbds );
     if( k_previous + dkds > kmax )
     { 
         double ratio = (kmax-k_previous )/dkds;
@@ -73,7 +73,7 @@ double arclengthcontinuation( double *a,
     while( lhs_norm > 1.e-13 && rhs_norm > jacobian_matrix_norm*1.e-15 && iteration < max_iter )
     {
         double Fa, Fb; // frequency equation gradients
-        double F = frequency_equation(*a,*b,gamma2,subcritical,is_ff,&Fa,&Fb);
+        double F = frequency_equation(*a,*b,gamma2,subcritical,bc,&Fa,&Fb);
         double dFdk = 0; // corrector
         double f = wave_number_residual(*k,gamma2,*a,*b,subcritical);
         double dfda = wave_equation_dfda(*k,gamma2,*a,*b,subcritical);
@@ -116,7 +116,7 @@ double arclengthpredictor( double a,
                            bool subcritical,
                            double arclength,
                            double gamma2,
-                           bool is_ff,
+                           boundary_condition bc,
                            double *previous_state,
                            double *dads,
                            double *dbds )
@@ -138,7 +138,7 @@ double arclengthpredictor( double a,
         if( ptp == 0.)
         {
             double dbdk = 0.;
-            double dadk = getdadkanddbdk(k,gamma2,a,b,subcritical,is_ff,&dbdk);
+            double dadk = getdadkanddbdk(k,gamma2,a,b,subcritical,bc,&dbdk);
             dkds = arclength/sqrt(1.+dadk*dadk+dbdk*dbdk); // arclength
            *dads = dadk * dkds; // 0
            *dbds = dbdk * dkds; // 0
@@ -214,7 +214,13 @@ void linearsolve3x3( const double input_matrix[][3], const double* input_rhs, do
 //p.951, s, gamma2 are derived from the parameters in equations (77) & (81)
 //From the wave number equation, b is a function of a and k, b(a,k).
 
-double getdadkanddbdk(double k,double gamma2,double a,double b,bool is_sub_critical, bool is_ff, double* dbdkptr)
+double getdadkanddbdk(double k,
+                      double gamma2,
+                      double a,
+                      double b,
+                      bool is_sub_critical,
+                      boundary_condition bc,
+                      double* dbdkptr)
 {
     if( b > 0. )
     {
@@ -226,7 +232,7 @@ double getdadkanddbdk(double k,double gamma2,double a,double b,bool is_sub_criti
         double dbdk = wave_equation_dbdk(dfdk, dfdb );
         *dbdkptr = dbdk;
         double Fa, Fb;
-        double F = frequency_equation(a,b,gamma2,is_sub_critical,is_ff,&Fa,&Fb);
+        double F = frequency_equation(a,b,gamma2,is_sub_critical,bc,&Fa,&Fb);
 
         //std::cout << " dbda " << dbda<< "   grad F " << Fa << "  " << Fb << "   den " << Fa + Fb*dbda << "\n";
         double dadk= - Fb * dbdk/( Fa + Fb*dbda);

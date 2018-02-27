@@ -1,10 +1,11 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>  // sqrt
+#include "frequency_equation.h" // boundary_condition
 void timoshenko_wave_numbers( double kmax,
                               double gamma2,
                               unsigned mode,
-                              bool is_ff,
+                              boundary_condition bc,
                               double* aptr,
                               double* bptr);
 int main()
@@ -14,7 +15,7 @@ int main()
   double poissons_ratio = .3;
   double density= .3;
   double E = 3.e+7;
-  bool is_ff = true;
+  boundary_condition bc = freefree;
   unsigned num_mode = 4;
 
   double nu = poissons_ratio;
@@ -31,7 +32,7 @@ std::cout << "gamma2 = " << gamma2 << "\n";
   {
       double a = 0;
       double b = 0;
-      timoshenko_wave_numbers( kmax, gamma2, mode, is_ff, &a, &b);
+      timoshenko_wave_numbers( kmax, gamma2, mode, bc, &a, &b);
       bool subcritical = ( factor-a*kmax > 0. );
       double scaled_frequency = 0.;
       if( subcritical )
