@@ -1,4 +1,3 @@
-double euler_wave_number( unsigned id );
 double wave_number_residual(double k,double gamma2,double a,double b,bool is_sub_critical);
 double wave_equation_dfdk(double k,double gamma2,double a,double b,bool is_sub_critical);
 double wave_equation_dfdb(double k,double gamma2,double a,double b,bool is_sub_critical);
