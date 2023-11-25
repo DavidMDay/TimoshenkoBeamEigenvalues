@@ -23,7 +23,7 @@ int main() {
   double gamma2 = gamma*gamma;
   double factor = sqrt( (gamma2 + 1.0)/gamma2);
   double jacobian = 0.0;
-  for(unsigned mode = 4; mode < 5; mode++) {
+  for(size_t mode = 4; mode < 5; mode++) {
     double a = euler_wave_number(mode, bc);
     double b = a;
     double a_critical = get_critical_point(mode+1, gamma2, bc);

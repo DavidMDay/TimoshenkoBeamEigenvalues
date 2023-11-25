@@ -189,18 +189,18 @@ arclengthcontinuation( continuation_state current,
 
   double rhs[] = { 1., 1., 1.};
   double lhs[] = { 1., 1., 1.};
-  double rhs_norm  = sqrt( 3.0 );
+  double rhs_norm  = sqrt(3.0);
   double lhs_norm  = rhs_norm;
   double jacobian_matrix_norm = 1.;
 
     auto max_iter = static_cast<size_t>(current.a);
     size_t lower_bound = 20;
-    max_iter = std::min(max_iter, lower_bound);
+    max_iter = std::max(max_iter, lower_bound);
     size_t iteration = 0;
 
     while( lhs_norm > 1.e-13 && rhs_norm > jacobian_matrix_norm*1.e-15 && iteration < max_iter ) {
 
-        //std::cout << "alp " << iteration << " " << lhs_norm  <<  " " << rhs_norm << "  " << jacobian_matrix_norm << std::endl;
+        //std::cout << iteration <<" lhs "<< lhs_norm <<" rhs "<<rhs_norm<<" J "<<jacobian_matrix_norm<< std::endl;
         parameter.a = current.a;
         parameter.b = current.b; 
         frequnency_equation_values v  = frequency_equation(parameter);
@@ -209,7 +209,7 @@ arclengthcontinuation( continuation_state current,
         double dFdk = 0; // corrector
         double f = wave_number_residual(current.k,parameter.gamma2,parameter.a,parameter.b,parameter.is_sub_critical);
 
-        //std::cout << "value " << v.F << " residual "  << f << std::endl;
+        //std::cout << "       value " << v.F << " residual "  << f << std::endl;
         double dfda = wave_equation_dfda(current.k,parameter.gamma2,parameter.a,parameter.b,parameter.is_sub_critical);
         double dfdb = wave_equation_dfdb(current.k,parameter.gamma2,parameter.a,parameter.b,parameter.is_sub_critical);
         double dfdk = wave_equation_dfdk(current.k,parameter.gamma2,parameter.a,parameter.b,parameter.is_sub_critical);
