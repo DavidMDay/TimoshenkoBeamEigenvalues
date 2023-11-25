@@ -1,77 +1,55 @@
 #include <iostream>
-#include <stdlib.h>
-#include <assert.h>
-#include <math.h>
+#include <cstdlib>
+#include <cassert>
+#include <cmath>
 #include "wave_number.h"
 #include "frequency_equation.h"
 #include "secular.h"
-double wave_frequency_equation( double* aptr,
-                              double* bptr,
-                              double gamma2,
-                              bool subcritical,
-                              boundary_condition bc,
-                              double k);
-
-double arclengthcontinuation( double *a,
-                              double *b, 
-                              double *k, 
-                              bool subcritical,
-                              double arclength,
-                              double gamma2,
-                              double kmax,
-                              boundary_condition bc,
-                              double *previous_state );
 
 void timoshenko_wave_numbers( double kmax,
                               double gamma2,
                               unsigned mode,
-                              boundary_condition bc,
+                              BoundaryCondition bc,
                               double* aptr,
                               double* bptr)
 {
     double arclength = .01;
     double factor = sqrt( (gamma2 + 1.)/gamma2 );
-    double jacobian = 0.;
+    //double jacobian = 0.;
     double a = euler_wave_number( mode, bc );
-    double b = a;
-    double k = 0.;
+    continuation_state current(a,a,0.0,0.0);
     bool subcritical = true;
     bool verbose = false;
-    double state_before_last[] = {a,b,k};
-    double previous_state[] = {a,b,k};
-    while( k < kmax ) 
-    {
-        for(unsigned i=0; i<3;i++) state_before_last[i] = previous_state[i];
-        previous_state[0] = a; previous_state[1] = b; previous_state[2] = k;
+    continuation_state previous = current;
+    continuation_state before_last = previous; 
+    while( current.k < kmax ) {
+        before_last = previous; 
+        previous = current;
+        current = arclengthcontinuation(previous,subcritical,arclength,
+                                                gamma2,kmax,bc,before_last);
 
-        double jacobian = arclengthcontinuation(&a,&b,&k,subcritical,arclength,
-                                                gamma2,kmax,bc,state_before_last);
-
-        bool next_subcritical = ( factor-a*k > 0. );
-        if( b == 0. )
-        {
+        bool next_subcritical = ( factor-current.a*current.k > 0. );
+        if( current.b == 0. ) {
             //verbose = true;
-            double a_critical = get_critical_point2( a, gamma2, bc);
+            double a_critical = get_critical_point2( current.a, gamma2, bc);
             //std::cout << "a_critical= " << a_critical << "\n";
             if( verbose ) std::cout << "a := a_critical\n";
-            a=a_critical;
+            current.a=a_critical;
             next_subcritical = false;
         }
-        if( subcritical != next_subcritical ) // b=0 singularity
-        {
+        if( subcritical != next_subcritical ) {// b=0 singularity
             double a_critical = get_critical_point2( a, gamma2, bc);
-            a = a_critical;
-            b = 0.;
-            k = factor/a;
+            current.a = a_critical;
+            current.b = 0.;
+            current.k = factor/a_critical;
             //std::cout << "singularity " << k <<  "  "  << a << "  " << b << "\n";
             subcritical = false;
             verbose = true;
         }
-        double scaled_frequency = 0.;
-        if( b < 0. ) exit(-1);
+        if( current.b < 0. ) exit(-1);
         //std::cout << k << " " <<  a << "  " << b << "\n";
     } // k
-    wave_frequency_equation(&a,&b,gamma2,subcritical,bc,kmax);
-    *aptr =  a;
-    *bptr =  b;
+    *aptr = current.a;
+    *bptr = current.b;
+    wave_frequency_equation(aptr,bptr,gamma2,subcritical,bc,kmax);
 }

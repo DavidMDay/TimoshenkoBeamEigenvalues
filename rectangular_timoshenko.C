@@ -1,13 +1,9 @@
 #include <iostream>
 #include <iomanip>
-#include <math.h>  // sqrt
-#include "frequency_equation.h" // boundary_condition
-void timoshenko_wave_numbers( double kmax,
-                              double gamma2,
-                              unsigned mode,
-                              boundary_condition bc,
-                              double* aptr,
-                              double* bptr);
+#include <cmath>
+#include "frequency_equation.h"
+#include "timoshenko_wave_numbers.h"
+
 int main()
 {
   double beam_thickness = 1.;
@@ -15,7 +11,7 @@ int main()
   double poissons_ratio = .3;
   double density= .3;
   double E = 3.e+7;
-  boundary_condition bc = freefree;
+  BoundaryCondition bc = freefree;
   unsigned num_mode = 4;
 
   double nu = poissons_ratio;

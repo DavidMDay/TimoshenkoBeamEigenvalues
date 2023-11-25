@@ -13,6 +13,7 @@ mpicxx -g -c timoshenko_wave_numbers.C
 #
 # drivers
 #  beam with rectangular cross section
+
 mpicxx -g rectangular_timoshenko.C -o rect timoshenko_wave_numbers.o wave_frequency_equation.o wave_number.o wave_number_gradients.o frequency_equation.o frequency_equation_cc.o frequency_equation_cf.o secular.o pseudoarclength.o
 #  beam with circular cross section
 mpicxx -g pipe_timoshenko.C -o pipe timoshenko_wave_numbers.o wave_frequency_equation.o wave_number.o wave_number_gradients.o frequency_equation.o frequency_equation_cc.o frequency_equation_cf.o secular.o pseudoarclength.o

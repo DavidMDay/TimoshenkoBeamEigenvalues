@@ -1,19 +1,15 @@
 #include <iostream>
-#include <stdlib.h> // for exit
-double wave_equation_dfdk(double k,double gamma2,double a,double b,bool is_sub_critical)
-{
-    double a2 = a*a;
-    double a4 = a2*a2;
-    double b2 = b*b;
-    double b4 = b2*b2;
-    double g2 = gamma2;
-    double g4 = g2*g2;
-    double dfdk = 0.;
-    if( is_sub_critical )
-        dfdk = -2.*k*(g2*a4 +(g4+1.)*a2*b2+ g2*b4);
-    else
-        dfdk = -2.*k*(g2*a4 -(g4+1.)*a2*b2+ g2*b4);
-    return dfdk;
+#include <cstdlib> // for exit
+#include "frequency_equation.h"
+double wave_equation_dfdk(double k, double gamma2, double a, double b, bool is_sub_critical) {
+  double a2 = a * a;
+  double a4 = a2 * a2;
+  double b2 = b * b;
+  double b4 = b2 * b2;
+  double g2 = gamma2;
+  double g4 = g2 * g2;
+  return (is_sub_critical ? -2. * k * (g2 * a4 + (g4 + 1.) * a2 * b2 + g2 * b4)
+                          : -2. * k * (g2 * a4 - (g4 + 1.) * a2 * b2 + g2 * b4));
 }
 double wave_equation_dfdb(double k,double gamma2,double a,double b,bool is_sub_critical)
 {

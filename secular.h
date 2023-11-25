@@ -1,2 +1,10 @@
-double get_critical_point( unsigned mode, double gamma2, boundary_condition bc );
-double get_critical_point2( double a, double gamma2, boundary_condition bc );
+
+#ifndef TIMOSHENKO_BEAM_EIGENVALUES_secular_EQUATION
+#define TIMOSHENKO_BEAM_EIGENVALUES_secular_EQUATION
+
+#include <cstddef>
+#include "frequency_equation.h"
+double get_critical_point(size_t mode, double gamma2, enum BoundaryCondition bc);
+double get_critical_point2(double a, double gamma2, enum BoundaryCondition bc);
+
+#endif

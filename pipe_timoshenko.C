@@ -1,14 +1,9 @@
 #include <iostream>
 #include <iomanip>
-#include <math.h>  // sqrt
+#include <cmath>
 #include "frequency_equation.h"
+#include "timoshenko_wave_numbers.h"
 
-void timoshenko_wave_numbers( double kmax,
-                              double gamma2,
-                              unsigned mode,
-                              boundary_condition bc,
-                              double* aptr,
-                              double* bptr);
 int main()
 {
   double beam_length = 1.;
@@ -18,7 +13,7 @@ int main()
   unsigned num_mode = 12;
   double outer_radius = .16;
   double inner_radius = .15;
-  boundary_condition bc = clampedfree;
+  BoundaryCondition bc = clampedfree;
 
   double nu = poissons_ratio;
   double mm = inner_radius/outer_radius;
