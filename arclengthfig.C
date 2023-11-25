@@ -1,6 +1,6 @@
 // The original purpose was to plot the number of iterations
 // taken by the nonlinear solver per step of the arc length
-// continuation algorithm.  Files 'param.data' and 'iter.data' were created.  
+// continuation algorithm.  Files 'param.data' and 'iter.data' were created.
 // Currently it seems to plot a(k), b(k), k and Jacobian(k)
 // as k increases from 0 to kmax.  a(0)=b(0) = 17.2
 // a(kmax) = 12.5,  b(kmax) = 5.5
@@ -44,7 +44,7 @@ int main() {
                                                 gamma2,kmax,bc,before_last);
         bool next_subcritical = ( factor-current.a* current.k > 0.0);
         if ( current.b == 0.0) {
-            if (verbose) { 
+            if (verbose) {
               std::cout<<"a=a_critical= "<<a_critical<<"\n";
             }
             current.a=a_critical;

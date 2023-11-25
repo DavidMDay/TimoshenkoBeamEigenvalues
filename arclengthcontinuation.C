@@ -55,9 +55,7 @@ dds arclengthpredictor( continuation_state current,
                            double arclength,
                            double gamma2,
                            BoundaryCondition bc,
-                           continuation_state previous)
-                           
-{
+                           continuation_state previous) {
     dds x;
     x.dkds = 0.0;
     if (current.b == 0.0) {
@@ -164,9 +162,7 @@ arclengthcontinuation( continuation_state current,
                               double gamma2,
                               double kmax,
                               BoundaryCondition bc,
-                              continuation_state previous)
-{
-  
+                              continuation_state previous) {
   assert( current.k < kmax );
   frequnency_equation_parameters parameter;
   parameter.gamma2 = gamma2;
@@ -202,10 +198,9 @@ arclengthcontinuation( continuation_state current,
 
         //std::cout << iteration <<" lhs "<< lhs_norm <<" rhs "<<rhs_norm<<" J "<<jacobian_matrix_norm<< std::endl;
         parameter.a = current.a;
-        parameter.b = current.b; 
+        parameter.b = current.b;
         frequnency_equation_values v  = frequency_equation(parameter);
 
-        
         double dFdk = 0; // corrector
         double f = wave_number_residual(current.k,parameter.gamma2,parameter.a,parameter.b,parameter.is_sub_critical);
 

@@ -4,7 +4,7 @@
 #include "frequency_equation.h"
 
 // output Jacobian, new (a,b) pair
-// input  k and frequnency_equation_parameters 
+// input  k and frequnency_equation_parameters
 double wave_frequency_equation(double* aptr,
                               double* bptr,
                               double gamma2,

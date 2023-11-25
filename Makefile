@@ -5,31 +5,31 @@ LINK= $(STANDARD)
 all: rect pipe plotabkj
 
 objects = timoshenko_wave_numbers.o wave_frequency_equation.o wave_number.o \
-	wave_number_gradients.o frequency_equation.o frequency_equation_cc.o \
-	frequency_equation_cf.o secular.o pseudoarclength.o
+	wave_number_gradients.o frequency_equation.o clamped_clamped.o \
+	clamped_free.o secular.o arclengthcontinuation.o
 
-rect : rectangular_timoshenko.o $(objects)
-	$(CC) $(LINK) rectangular_timoshenko.o $(objects) -o rect
-pipe : pipe_timoshenko.o $(objects)
-	$(CC) $(LINK) pipe_timoshenko.o $(objects) -o pipe
-plotabjk: arclengthfig.o $(objects)
-	$(CC) $(LINK) arclengthfig.o $(objects) -o figure
+rect : rectangular_cross_section.o $(objects)
+	$(CC) $(LINK) rectangular_cross_section.o $(objects) -o rect
+pipe : circular_cross_section.o $(objects)
+	$(CC) $(LINK) circular_cross_section.o $(objects) -o pipe
+plotabkj: arclengthfig.o $(objects)
+	$(CC) $(LINK) arclengthfig.o $(objects) -o plotabkj
 
-rectangular_timoshenko.o : rectangular_timoshenko.C
-	$(CC) $(COMPILE) rectangular_timoshenko.C -I.
-pipe_timoshenko.o : pipe_timoshenko.C
-	$(CC) $(COMPILE) pipe_timoshenko.C -I.
+rectangular_cross_section.o : rectangular_cross_section.C
+	$(CC) $(COMPILE) rectangular_cross_section.C -I.
+circular_cross_section.o : circular_cross_section.C
+	$(CC) $(COMPILE) circular_cross_section.C -I.
 arclengthfig.o : arclengthfig.C
 	$(CC) $(COMPILE) arclengthfig.C -I.
 
-frequency_equation_cc.o : frequency_equation_cc.C
-	$(CC) $(COMPILE) frequency_equation_cc.C -I.
-frequency_equation_cf.o : frequency_equation_cf.C
-	$(CC) $(COMPILE) frequency_equation_cf.C -I.
-frequency_equation.o : frequency_equation.C frequency_equation_cc.C frequency_equation_cf.C
+clamped_clamped.o : clamped_clamped.C
+	$(CC) $(COMPILE) clamped_clamped.C -I.
+clamped_free.o : clamped_free.C
+	$(CC) $(COMPILE) clamped_free.C -I.
+frequency_equation.o : frequency_equation.C clamped_clamped.C clamped_free.C
 	$(CC) $(COMPILE) frequency_equation.C -I.
-pseudoarclength.o : pseudoarclength.C
-	$(CC) $(COMPILE) pseudoarclength.C -I.
+arclengthcontinuation.o : arclengthcontinuation.C
+	$(CC) $(COMPILE) arclengthcontinuation.C -I.
 secular.o : secular.C
 	$(CC) $(COMPILE) secular.C -I.
 timoshenko_wave_numbers.o: timoshenko_wave_numbers.C
@@ -41,8 +41,11 @@ wave_number_gradients.o : wave_number_gradients.C
 wave_frequency_equation.o : wave_frequency_equation.C
 	$(CC) $(COMPILE) wave_frequency_equation.C -I.
 clean:
-	rm arclengthfig.o rectangular_timoshenko.o pipe_timoshenko.o \
-	frequency_equation.o frequency_equation_cc.o \
-	frequency_equation_cf.o pseudoarclength.o secular.o \
+	rm arclengthfig.o rectangular_cross_section.o circular_cross_section.o \
+	frequency_equation.o clamped_clamped.o clamped_free.o \
+	arclengthcontinuation.o secular.o \
 	timoshenko_wave_numbers.o wave_number.o \
 	wave_frequency_equation.o wave_number_gradients.o
+
+clean_exec:
+	rm plotabkj pipe rect

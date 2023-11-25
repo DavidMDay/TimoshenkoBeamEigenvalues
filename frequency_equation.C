@@ -2,8 +2,6 @@
 #include <iostream>
 #include <limits>  // std::numeric_limits
 #include <cstdlib>
-#include "frequency_equation_cc.h"
-#include "frequency_equation_cf.h"
 #include "frequency_equation.h"
 //timoshenko beam,  a<ac, implicit relationship between the wave numbers
 // page 951, a_c  equation (79), g2 : equation (81),
@@ -102,9 +100,9 @@ frequnency_equation_values frequency_equation(frequnency_equation_parameters p) 
       }
     } else {
       if (p.bc == clampedclamped) {
-        return frequency_equation_cc(p);// clamped clamped
-      } else {  // clampedfree
-        return frequency_equation_cf(p);// clamped free
+        return clamped_clamped(p);
+      } else {
+        return clamped_free(p);
       }
     }
     return {};

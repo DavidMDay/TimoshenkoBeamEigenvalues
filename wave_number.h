@@ -1,9 +1,5 @@
-
-#ifndef TIMOSHENKO_BEAM_EIGENVALUES_wave_EQUATION
-#define TIMOSHENKO_BEAM_EIGENVALUES_wave_EQUATION
-
-//#include <cstddef>
-//#include "frequency_equation.h"
+#ifndef TIMOSHENKO_BEAM_EIGENVALUES_WAVE_EQUATION
+#define TIMOSHENKO_BEAM_EIGENVALUES_WAVE_EQUATION
 
 double wave_number_residual(double k,double gamma2,double a,double b,bool is_sub_critical);
 double wave_equation_dfdk(double k,double gamma2,double a,double b,bool is_sub_critical);

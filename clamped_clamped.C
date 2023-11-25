@@ -4,7 +4,7 @@
 // page 951, a_c  equation (79), g2 : equation (81),
 // subcritical  a < ac
 
-frequnency_equation_values frequency_equation_cc_sub(frequnency_equation_parameters p) {
+frequnency_equation_values clamped_clamped_sub(frequnency_equation_parameters p) {
   double a2 = p.a * p.a;
   double b2 = p.b * p.b;
   double ab = p.a * p.b;
@@ -45,7 +45,7 @@ frequnency_equation_values frequency_equation_cc_sub(frequnency_equation_paramet
 //  page 951, a_c  equation (79), g2 : equation (81),
 //  super critical
 
-frequnency_equation_values frequency_equation_cc_super(frequnency_equation_parameters p) {
+frequnency_equation_values clamped_clamped_super(frequnency_equation_parameters p) {
   double a2 = p.a * p.a;
   double b2 = p.b * p.b;
   double ab = p.a * p.b;
@@ -83,11 +83,11 @@ frequnency_equation_values frequency_equation_cc_super(frequnency_equation_param
   return f;
 }
 // timoshenko beam,  implicit relationship between the wave numbers
-frequnency_equation_values frequency_equation_cc(frequnency_equation_parameters p) {
+frequnency_equation_values clamped_clamped(frequnency_equation_parameters p) {
   if (p.is_sub_critical) {
-    return frequency_equation_cc_sub(p);
+    return clamped_clamped_sub(p);
   } else {
-    return frequency_equation_cc_super(p);
+    return clamped_clamped_super(p);
   }
   return {};
 }
