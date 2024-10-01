@@ -10,12 +10,25 @@
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
-#include "src/wave_number.hpp"
-#include "src/frequency_equation.hpp"
-#include "src/secular.hpp"
+
+#include "NewbieConfig.h"
+
+#ifdef USE_SPECIAL_FUNC
+#  include "src/wave_number.hpp"
+#  include "src/frequency_equation.hpp"
+#  include "src/secular.hpp"
+#endif
 
 // mode 4
-int main() {
+int main(int argc, char* argv[])
+{
+  if (argc < 2) {
+    std::cout << argv[0] << " Version " << SpecFunc_VERSION_MAJOR << "."
+              << SpecFunc_VERSION_MINOR << std::endl;
+    std::cout << "Usage: " << argv[0] << std::endl;
+    std::cout << "hacking in help interface  type randomly to get past this" << std::endl;
+  }
+#ifdef USE_SPECIAL_FUNC
   double kmax = .4;// .2273; // .4;// physics
   double gamma = 2.205;
   BoundaryCondition bc = freefree;
@@ -74,5 +87,8 @@ int main() {
     current.b = b;
     std::cout <<current.a<<"  "<<current.b<<"  " <<current.k<<"  "<<current.jacobian<< std::endl;
   } // mode
+#else
+  std::cout << "sf off  " << std::endl;
+#endif
   return 0;
 }

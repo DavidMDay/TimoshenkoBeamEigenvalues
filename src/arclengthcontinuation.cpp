@@ -3,8 +3,8 @@
 #include <algorithm> // std::swap
 #include <cmath>
 #include <cstdlib>
-#include "wave_number.h"
-#include "frequency_equation.h"
+#include "wave_number.hpp"
+#include "frequency_equation.hpp"
 
 namespace {
 

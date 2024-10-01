@@ -2,7 +2,7 @@
 #include <iostream>
 #include <limits>  // std::numeric_limits
 #include <cstdlib>
-#include "frequency_equation.h"
+#include "frequency_equation.hpp"
 //timoshenko beam,  a<ac, implicit relationship between the wave numbers
 // page 951, a_c  equation (79), g2 : equation (81),
 // subcritical  a < ac

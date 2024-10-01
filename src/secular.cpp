@@ -1,7 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <cassert>
-#include "frequency_equation.h"
+#include "frequency_equation.hpp"
 
 namespace {
 double secular_equation_ff(double a, double gamma2) {
