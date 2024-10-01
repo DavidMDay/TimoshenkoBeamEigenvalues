@@ -19,10 +19,11 @@ double wave_equation_dfdb(double k,double gamma2,double a,double b,bool is_sub_c
     double g4 = gamma2*gamma2;
     double k2 = k*k;
     double dfdb = 0.;
-    if( is_sub_critical )
+    if( is_sub_critical ) {
         dfdb = -2.*b*(2.*k2*g2*b2+g2+1. + k2*a2*(g4+1));
-    else
+    } else {
         dfdb =  2.*b*(-2.*k2*g2*b2+g2+1.+ k2*a2*(g4+1));
+    }      
     return dfdb;
 }
 double wave_equation_dfda(double k,double gamma2,double a,double b,bool is_sub_critical)
@@ -33,9 +34,9 @@ double wave_equation_dfda(double k,double gamma2,double a,double b,bool is_sub_c
     double g4 = gamma2*gamma2;
     double k2 = k*k;
     double dfda = 0.;
-    if( is_sub_critical )
+    if( is_sub_critical ) {
         dfda = 2.*a*(-2.*k2*g2*a2+(g2+1.-k2*(g4+1.)*b2));
-    else
+    } else
         dfda = 2.*a*(-2.*k2*g2*a2+(g2+1.+k2*(g4+1.)*b2));
     return dfda;
 }
