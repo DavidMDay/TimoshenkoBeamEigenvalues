@@ -3,9 +3,9 @@
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
-#include "wave_number.h"
-#include "frequency_equation.h"
-#include "secular.h"
+#include "wave_number.hpp"
+#include "frequency_equation.hpp"
+#include "secular.hpp"
 
 void timoshenko_wave_numbers(
     double kmax, double gamma2, size_t mode, BoundaryCondition bc, double* aptr, double* bptr) {

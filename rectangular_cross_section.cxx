@@ -1,8 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-#include "frequency_equation.h"
-#include "timoshenko_wave_numbers.h"
+#include "src/frequency_equation.hpp"
+#include "src/timoshenko_wave_numbers.hpp"
 
 int main() {
   double beam_thickness = 1.0;

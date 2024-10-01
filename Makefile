@@ -15,11 +15,11 @@ pipe : circular_cross_section.o $(objects)
 plotabkj: arclengthfig.o $(objects)
 	$(CC) $(LINK) arclengthfig.o $(objects) -o plotabkj
 
-rectangular_cross_section.o : rectangular_cross_section.C
-	$(CC) $(COMPILE) rectangular_cross_section.C -I.
-circular_cross_section.o : circular_cross_section.C
-	$(CC) $(COMPILE) circular_cross_section.C -I.
-arclengthfig.o : arclengthfig.C
+rectangular_cross_section.o : rectangular_cross_section.cxx
+	$(CC) $(COMPILE) rectangular_cross_section.cxx -I.
+circular_cross_section.o : circular_cross_section.cxx
+	$(CC) $(COMPILE) circular_cross_section.cxx -I.
+arclengthfig.o : arclengthfig.cxx
 	$(CC) $(COMPILE) arclengthfig.C -I.
 
 clamped_clamped.o : clamped_clamped.C

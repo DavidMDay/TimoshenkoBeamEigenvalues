@@ -10,9 +10,9 @@
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
-#include "wave_number.h"
-#include "frequency_equation.h"
-#include "secular.h"
+#include "src/wave_number.hpp"
+#include "src/frequency_equation.hpp"
+#include "src/secular.hpp"
 
 // mode 4
 int main() {

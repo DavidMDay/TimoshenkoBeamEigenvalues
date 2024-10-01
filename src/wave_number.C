@@ -1,4 +1,4 @@
-#include "wave_number.h"
+#include "wave_number.hpp"
 //timoshenko beam,  implicit relationship between the wave numbers
 //p.951, s, gamma2 are derived from the parameters in equations (77) & (81)
 // This is the residual for the wave equation constraint ...

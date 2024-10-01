@@ -1,7 +1,7 @@
 #include <cassert>
 #include <cmath>
-#include "wave_number.h"
-#include "frequency_equation.h"
+#include "wave_number.hpp"
+#include "frequency_equation.hpp"
 
 // output Jacobian, new (a,b) pair
 // input  k and frequnency_equation_parameters

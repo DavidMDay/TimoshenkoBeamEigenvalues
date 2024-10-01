@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib> // for exit
-#include "frequency_equation.h"
+#include "frequency_equation.hpp"
 double wave_equation_dfdk(double k, double gamma2, double a, double b, bool is_sub_critical) {
   double a2 = a * a;
   double a4 = a2 * a2;
