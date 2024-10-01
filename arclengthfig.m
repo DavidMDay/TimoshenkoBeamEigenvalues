@@ -1,3 +1,4 @@
+% MATLAB script generating a figure
 load('param.data');
 load('iter.data');
 k = param(:,1);
