@@ -2,7 +2,7 @@
 #define TIMOSHENKO_BEAM_EIGENVALUES_WAVE_NUMBERS
 
 #include <cstddef>
-#include "frequency_equation.h"
+#include "frequency_equation.hpp"
 
 void timoshenko_wave_numbers( double kmax,
                               double gamma2,

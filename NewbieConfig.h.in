@@ -1,4 +1,4 @@
-// the configured options and settings for SpecFunc
-#define SpecFunc_VERSION_MAJOR @SpecFunc_VERSION_MAJOR@
-#define SpecFunc_VERSION_MINOR @SpecFunc_VERSION_MINOR@
+// the configured options and settings for TimoshenkoEig
+#define TimoshenkoEig_VERSION_MAJOR @TimoshenkoEig_VERSION_MAJOR@
+#define TimoshenkoEig_VERSION_MINOR @TimoshenkoEig_VERSION_MINOR@
 
