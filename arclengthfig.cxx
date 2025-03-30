@@ -1,9 +1,10 @@
-// The original purpose was to plot the number of iterations
-// taken by the nonlinear solver per step of the arc length
-// continuation algorithm.  Files 'param.data' and 'iter.data' were created.
-// Currently it seems to plot a(k), b(k), k and Jacobian(k)
+// An arclength continuation algorithm solves the nonlinear problem.
+// The continuation parameter is k, the wave number.
+// arclength fig plots iterations, file 'iter.data', as a function
+// of the continuation parameter, file 'param.data'.
+// Currently a(k), b(k), k and Jacobian(k) are recorded
 // as k increases from 0 to kmax.  a(0)=b(0) = 17.2
-// a(kmax) = 12.5,  b(kmax) = 5.5
+// (a,b)(kmax)=(12.5, 5.5).
 // At kx = 0.065,  b(kx)=0, jacobian(kx)=0,  a(kx) = 16.7
 // The Jacobian changes sign often without b changing sign.
 #include <iostream>
@@ -20,17 +21,16 @@
 #endif
 
 // mode 4
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
 
   if (argc < 2) {
     std::cout << argv[0] << " Version " << TimoshenkoEig_VERSION_MAJOR << "."
               << TimoshenkoEig_VERSION_MINOR << std::endl;
-    std::cout << "Usage: " << argv[0] << std::endl;
-    std::cout << "hacking in help interface  type randomly to get past this" << std::endl;
+    std::cout << "Usage would be here  You typed: " << argv[0] << std::endl;
+    std::cout << "Deactivated" << std::endl;
   }
 #ifdef USE_TIMOSHENKO_EIG
-  double kmax = .4;// .2273; // .4;// physics
+  double kmax = 0.4;// .2273; // .4;// physics
   double gamma = 2.205;
   BoundaryCondition bc = freefree;
   double arclength = .01;
