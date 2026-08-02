@@ -7,3 +7,9 @@ the Journal of Sound and Vibration, 2225 (5), 1999, pp. 935-988.
 
 TODO: update src, document prerequisites from Han and Benaroya
 about intent, usage, notation
+
+ rm -rf build && mkdir build && cd build && cmake -S .. -B .
+ cmake --build .
+ make clean && make && ctest
+ ctest
+
